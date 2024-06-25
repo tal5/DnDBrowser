@@ -1,0 +1,9 @@
+.graySpells > button {
+    background-color: rgb(249, 249, 249);
+}
+.checklist-wrapper:nth-child(odd) {
+    background-color: rgb(249, 249, 249);
+}
+.checklist-check {
+    margin-left: 2%;
+}
