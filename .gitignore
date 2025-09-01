@@ -131,3 +131,6 @@ dist
 
 # Database files
 *.db
+
+# Intellij IDEA
+.idea/
