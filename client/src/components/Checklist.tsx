@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 interface Props {
   title: string;
   values: string[] | undefined;
-  checkedValues: Set<String> | undefined;
+  checkedValues: Set<string> | undefined;
   onSelect: (selected: string) => void;
   onRemove: (removed: string) => void;
 }

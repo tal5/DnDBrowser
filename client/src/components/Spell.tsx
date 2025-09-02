@@ -1,15 +1,10 @@
-import { Button } from "react-bootstrap";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-
-export async function spellLoader({ params }: LoaderFunctionArgs) {
-  return fetch("/api/spells/" + params.spell).then(res => res.json());
+interface Props {
+    spell: Record<string, any>
 }
 
-function Spell() {
-  const spell = useLoaderData() as Record<string, any>;
+function Spell({spell} : Props) {
   return (
     <>
-      <title>{spell.name}</title>
       <p>Name: {spell.name}</p>
       <p>Level: {spell.level}</p>
       <p>Source: {spell.source}</p>
@@ -21,7 +16,6 @@ function Spell() {
       <h6>Description:</h6>
       <div dangerouslySetInnerHTML={{ __html: spell.description }} />
       <p>Spell lists: {JSON.parse(spell.spell_lists).join(", ")}</p>
-      <Button href="/spells">Back</Button>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import SpellBrowser from "./pages/SpellBrowser";
-import Spell, {spellLoader} from "./pages/Spell";
+import SingleSpell, {spellLoader} from "./pages/SingleSpell.tsx";
 import Home from "./pages/Home";
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         },
         {
           path: "spell/:spell",
-          Component: Spell,
+          Component: SingleSpell,
           loader: spellLoader
         }
       ]
