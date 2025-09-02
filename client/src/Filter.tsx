@@ -14,13 +14,14 @@ function updateSearchParams(
 }
 
 export function createChecklist(
+  category: string,
   id: string,
   rawSearchParams: ReturnType<typeof useSearchParams>,
   valueProcessor?: ValueProcessor,
   sorter?: Sorter
 ): ReturnType<typeof Checklist> {
   const [searchParams] = rawSearchParams;
-  const [types, hasTypes] = useTypesFetch(id, valueProcessor, sorter);
+  const [types, hasTypes] = useTypesFetch(category, id, valueProcessor, sorter);
   const name = Utils.displayString(id) + ": ";
   const values = () =>
     (JSON.parse(searchParams.get(id) as string) as string[]) ?? [];

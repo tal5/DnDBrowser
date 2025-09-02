@@ -2,13 +2,14 @@ import { Button } from "react-bootstrap";
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 
 export async function spellLoader({ params }: LoaderFunctionArgs) {
-  return fetch("/api/spell/" + params.spell).then(res => res.json());
+  return fetch("/api/spells/" + params.spell).then(res => res.json());
 }
 
 function Spell() {
   const spell = useLoaderData() as Record<string, any>;
   return (
     <>
+      <title>{spell.name}</title>
       <p>Name: {spell.name}</p>
       <p>Level: {spell.level}</p>
       <p>Source: {spell.source}</p>

@@ -5,6 +5,13 @@ import Utils from "../Utils";
 import SpellsAccordion from "../components/SpellsAccordion";
 import { useSearchParams } from "react-router-dom";
 
+type ExcludeFirst<T extends readonly unknown[]> = T extends readonly [unknown, ...infer Rest] ? Rest : []
+
+
+function createChecklist(...params: ExcludeFirst<Parameters<typeof Filter.createChecklist>>): ReturnType<typeof Filter.createChecklist> {
+  return Filter.createChecklist("spells", ...params)
+}
+
 function SpellBrowser() {
   const [spells, setSpells] = useState<[] | null>(null);
   const rawSearchParams = useSearchParams();
@@ -19,15 +26,15 @@ function SpellBrowser() {
   return (
     <Container fluid>
       <Row>
-        <Col xs="auto">{Filter.createChecklist("level", rawSearchParams)}</Col>
-        <Col xs="auto">{Filter.createChecklist("school", rawSearchParams)}</Col>
+        <Col xs="auto">{createChecklist("level", rawSearchParams)}</Col>
+        <Col xs="auto">{createChecklist("school", rawSearchParams)}</Col>
         <Col xs="auto">
-          {Filter.createChecklist("casting_time", rawSearchParams, (value) =>
+          {createChecklist("casting_time", rawSearchParams, (value) =>
             Utils.before(value, ",")
           )}
         </Col>
         <Col xs="auto">
-          {Filter.createChecklist(
+          {createChecklist(
             "source",
             rawSearchParams,
             (value) => value.split("/"),
@@ -45,18 +52,18 @@ function SpellBrowser() {
           )}
         </Col>
         <Col xs="auto">
-          {Filter.createChecklist("spell_lists", rawSearchParams, (value) =>
+          {createChecklist("spell_lists", rawSearchParams, (value) =>
             JSON.parse(value).map((option: string) =>
               Utils.before(option, " (Optional)")
             )
           )}
         </Col>
         <Col xs="auto">
-          {Filter.createChecklist("duration", rawSearchParams)}
+          {createChecklist("duration", rawSearchParams)}
         </Col>
-        <Col xs="auto">{Filter.createChecklist("range", rawSearchParams)}</Col>
+        <Col xs="auto">{createChecklist("range", rawSearchParams)}</Col>
         <Col xs="auto">
-          {Filter.createChecklist("components", rawSearchParams, (value) =>
+          {createChecklist("components", rawSearchParams, (value) =>
             JSON.parse(value)
               .map((option: string) => Utils.before(option, " ("))
               .filter((option: string) => option.length == 1)
