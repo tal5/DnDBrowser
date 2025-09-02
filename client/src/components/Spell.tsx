@@ -1,8 +1,10 @@
+import SpellData from "../../../common/types/SpellData.ts";
+
 interface Props {
-    spell: Record<string, any>
+    spell: SpellData
 }
 
-function Spell({spell} : Props) {
+function Spell({spell}: Props) {
   return (
     <>
       <p>Name: {spell.name}</p>
@@ -11,11 +13,11 @@ function Spell({spell} : Props) {
       <p>School: {spell.school}</p>
       <p>Casting time: {spell.casting_time}</p>
       <p>Range: {spell.range}</p>
-      <p>Components: {JSON.parse(spell.components).join(", ")}</p>
+      <p>Components: {spell.components.join(", ")}</p>
       <p>Duration: {spell.duration}</p>
       <h6>Description:</h6>
       <div dangerouslySetInnerHTML={{ __html: spell.description }} />
-      <p>Spell lists: {JSON.parse(spell.spell_lists).join(", ")}</p>
+      <p>Spell lists: {spell.spell_lists.join(", ")}</p>
     </>
   );
 }

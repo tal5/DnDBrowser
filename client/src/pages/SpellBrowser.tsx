@@ -53,9 +53,7 @@ function SpellBrowser() {
         </Col>
         <Col xs="auto">
           {createChecklist("spell_lists", rawSearchParams, (value) =>
-            JSON.parse(value).map((option: string) =>
-              Utils.before(option, " (Optional)")
-            )
+            Utils.before(value, " (Optional)")
           )}
         </Col>
         <Col xs="auto">
@@ -64,9 +62,7 @@ function SpellBrowser() {
         <Col xs="auto">{createChecklist("range", rawSearchParams)}</Col>
         <Col xs="auto">
           {createChecklist("components", rawSearchParams, (value) =>
-            JSON.parse(value)
-              .map((option: string) => Utils.before(option, " ("))
-              .filter((option: string) => option.length == 1)
+            Utils.before(value, " (")
           )}
         </Col>
       </Row>
